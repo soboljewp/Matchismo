@@ -7,7 +7,6 @@
 //
 
 #import "CardGameViewController.h"
-#import "PlayingCardDeck.h"
 #import "CardMatchingGame.h"
 
 @interface CardGameViewController ()
@@ -42,9 +41,9 @@ static const int MISMATCH_PENALTY = 2;
     self.modeControl.enabled = !self.gameRunning;
 }
 
-- (Deck *)createDeck
+- (Deck *)createDeck // abstract
 {
-    return [[PlayingCardDeck alloc] init];
+    return nil;
 }
 
 - (CardMatchingGame *)createGame
