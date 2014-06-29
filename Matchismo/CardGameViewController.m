@@ -13,9 +13,7 @@
 @property (strong, nonatomic) CardMatchingGame *game;
 @property (strong, nonatomic) IBOutletCollection(UIButton) NSArray *cardButtons;
 @property (weak, nonatomic) IBOutlet UILabel *scoreLabel;
-@property (weak, nonatomic) IBOutlet UISegmentedControl *modeControl;
 @property (weak, nonatomic) IBOutlet UILabel *lastActionLabel;
-@property (nonatomic) BOOL gameRunning;
 @property (nonatomic) NSUInteger matchCount;
 @end
 
@@ -35,11 +33,7 @@ static const int MISMATCH_PENALTY = 2;
     return _matchCount;
 }
 
-- (void)setGameRunning:(BOOL)gameRunning
-{
-    _gameRunning = gameRunning;
-    self.modeControl.enabled = !self.gameRunning;
-}
+
 
 - (Deck *)createDeck // abstract
 {
@@ -55,24 +49,14 @@ static const int MISMATCH_PENALTY = 2;
 
 - (IBAction)touchCardButton:(UIButton *)sender
 {
-    self.gameRunning = YES;
     int chosenButtonIndex = [self.cardButtons indexOfObject:sender];
     [self.game chooseCardAtIndex:chosenButtonIndex];
     [self updateUI];
 }
-
-- (IBAction)tochDealButton:(UIButton *)sender {
+- (IBAction)touchDealButton:(id)sender {
     self.game = [self createGame];
     self.game.cardsToMatchCount = self.matchCount;
-    self.gameRunning = NO;
     [self updateUI];
-}
-
-- (IBAction)touchGameModeControl:(UISegmentedControl *)sender {
-    NSLog(@"Selected game mode segment: %d", sender.selectedSegmentIndex);
-    
-    self.matchCount = sender.selectedSegmentIndex + 2;
-    self.game.cardsToMatchCount = self.matchCount;
 }
 
 - (void)updateUI
