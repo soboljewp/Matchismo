@@ -106,14 +106,14 @@ static const int COST_TO_CHOOSE = 1;
                     for (Card *otherCard in otherChosenCards) {
                         otherCard.matched = YES;
                     }
-                    NSLog(@"Found match for %d points", self.lastActionScore);
+                    NSLog(@"Found match for %ld points", (long)self.lastActionScore);
                 } else {
                     // no match
                     self.lastActionScore = -self.mismatchPenalty;
                     for (Card *otherCard in otherChosenCards) {
                         otherCard.chosen = NO;
                     }
-                    NSLog(@"No match. %d penalty!", self.mismatchPenalty);
+                    NSLog(@"No match. %ld penalty!", (long)self.mismatchPenalty);
                 }
             }
             else {

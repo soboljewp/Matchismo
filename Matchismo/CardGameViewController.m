@@ -49,7 +49,7 @@ static const int MISMATCH_PENALTY = 2;
 
 - (IBAction)touchCardButton:(UIButton *)sender
 {
-    int chosenButtonIndex = [self.cardButtons indexOfObject:sender];
+    NSUInteger chosenButtonIndex = [self.cardButtons indexOfObject:sender];
     [self.game chooseCardAtIndex:chosenButtonIndex];
     [self updateUI];
 }
@@ -62,7 +62,7 @@ static const int MISMATCH_PENALTY = 2;
 - (void)updateUI
 {
     for (UIButton *cardButton in self.cardButtons) {
-        int cardButtonIndex = [self.cardButtons indexOfObject:cardButton];
+        NSUInteger cardButtonIndex = [self.cardButtons indexOfObject:cardButton];
         Card *card = [self.game cardAtIndex:cardButtonIndex];
         [cardButton setTitle:[self titleForCard:card]
                     forState:UIControlStateNormal];
