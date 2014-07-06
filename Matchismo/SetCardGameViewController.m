@@ -7,6 +7,8 @@
 //
 
 #import "SetCardGameViewController.h"
+#import "SetCardDeck.h"
+#import "SetCard.h"
 
 @interface SetCardGameViewController ()
 
@@ -16,8 +18,7 @@
 
 - (Deck *)createDeck
 {
-    // Create new set game here.
-    return nil;
+    return [[SetCardDeck alloc] init];
 }
 
 - (void)updateUI
@@ -27,9 +28,22 @@
     for (UIButton *cardButton in self.cardButtons) {
         NSUInteger cardButtonIndex = [self.cardButtons indexOfObject:cardButton];
         Card *card = [self.game cardAtIndex:cardButtonIndex];
-        [cardButton setTitle:@""
-                    forState:UIControlStateNormal];
+        [cardButton setAttributedTitle:[self titleForCard:card]
+                              forState:UIControlStateNormal];
         cardButton.enabled = !card.isMatched;
     }
 }
+
+- (NSAttributedString *)titleForCard:(Card *)card
+{
+    NSAttributedString *content = [[NSAttributedString alloc] initWithString:@"?"];
+    
+    if ([card isKindOfClass:[SetCard class]]) {
+        
+        
+    }
+
+    return content;
+}
+
 @end
