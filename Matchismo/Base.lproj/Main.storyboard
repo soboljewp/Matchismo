@@ -779,6 +779,22 @@
                         <outletCollection property="cardButtons" destination="IYW-MM-Y4K" id="PPk-Cm-ebQ"/>
                         <outletCollection property="cardButtons" destination="kLo-GD-o6b" id="qT8-WM-NzU"/>
                         <outletCollection property="cardButtons" destination="Kai-GH-hma" id="tgx-Ci-Y0f"/>
+                        <outletCollection property="cardButtons" destination="2Ln-np-xwE" id="gc9-wd-1hL"/>
+                        <outletCollection property="cardButtons" destination="fdG-yg-M4S" id="QNA-Aj-FXH"/>
+                        <outletCollection property="cardButtons" destination="Dgl-Ig-EER" id="egO-t5-YIw"/>
+                        <outletCollection property="cardButtons" destination="ZzR-un-j12" id="hSu-Ti-45J"/>
+                        <outletCollection property="cardButtons" destination="dB0-0p-50F" id="f7K-Ud-bS5"/>
+                        <outletCollection property="cardButtons" destination="gKW-2W-Ahv" id="w00-P8-8O5"/>
+                        <outletCollection property="cardButtons" destination="PrL-ky-NFj" id="yko-dM-qb1"/>
+                        <outletCollection property="cardButtons" destination="BC1-Bz-70G" id="QO8-Jl-b1z"/>
+                        <outletCollection property="cardButtons" destination="2gL-V5-ZYD" id="wOo-y8-0pY"/>
+                        <outletCollection property="cardButtons" destination="9sO-yp-jzQ" id="e5l-iI-BSl"/>
+                        <outletCollection property="cardButtons" destination="hWD-eU-AXD" id="jPg-w1-leA"/>
+                        <outletCollection property="cardButtons" destination="Mh8-ff-lKF" id="Pxf-3H-dht"/>
+                        <outletCollection property="cardButtons" destination="4V4-o4-9p6" id="Vaj-PP-BW6"/>
+                        <outletCollection property="cardButtons" destination="66P-Op-jjL" id="ff1-07-Dpb"/>
+                        <outletCollection property="cardButtons" destination="TMx-tG-nIB" id="sZO-oW-jxu"/>
+                        <outletCollection property="cardButtons" destination="ZEH-rc-OD7" id="Abv-7Q-CXs"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="unC-qS-75E" sceneMemberID="firstResponder"/>
