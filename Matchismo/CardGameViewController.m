@@ -57,7 +57,9 @@ static const int MISMATCH_PENALTY = 2;
     NSLog(@"Chosen card count: %d", [self.game.chosenCards count]);
     NSMutableString *chosenCardsString = [[NSMutableString alloc] init];
     for (Card *card in self.game.chosenCards) {
-        [chosenCardsString appendString:card.contents];
+        if (card.contents) {
+            [chosenCardsString appendString:card.contents];
+        }
     }
     self.lastActionLabel.text = chosenCardsString;
     

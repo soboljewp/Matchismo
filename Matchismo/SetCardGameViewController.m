@@ -28,7 +28,7 @@
 
 - (void)updateUI
 {
-    //[super updateUI];
+    [super updateUI];
     
     for (UIButton *cardButton in self.cardButtons) {
         NSUInteger cardButtonIndex = [self.cardButtons indexOfObject:cardButton];
