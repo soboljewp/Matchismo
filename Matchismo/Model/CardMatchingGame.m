@@ -33,7 +33,6 @@ static const int COST_TO_CHOOSE = 1;
     self = [super init];
     
     if (self) {
-        self.cardsToMatchCount = 2;
         for (int i = 0; i < count; i++) {
             Card* card = [deck drawRandomCard];
             if (card) {
@@ -56,17 +55,16 @@ static const int COST_TO_CHOOSE = 1;
     self.score += _lastActionScore;
 }
 
+- (NSUInteger)cardsToMatchCount
+{
+    Card *card = [self.cards firstObject];
+    return card.matchCount;
+}
+
 - (NSMutableArray *)chosenCards
 {
     if (!_chosenCards) _chosenCards = [[NSMutableArray alloc] init];
     return _chosenCards;
-}
-
-- (void)setCardsToMatchCount:(NSUInteger)cardsToMatchCount
-{
-    if (cardsToMatchCount > 1) {
-        _cardsToMatchCount = cardsToMatchCount;
-    }
 }
 
 - (Card *)cardAtIndex:(NSUInteger)index
@@ -77,6 +75,7 @@ static const int COST_TO_CHOOSE = 1;
 - (void)chooseCardAtIndex:(NSUInteger)index
 {
     Card* card = [self cardAtIndex:index];
+    self.lastActionScore = 0;
     
     if (!card.isMatched) {
         if (card.isChosen) {
@@ -115,10 +114,6 @@ static const int COST_TO_CHOOSE = 1;
                     }
                     NSLog(@"No match. %ld penalty!", (long)self.mismatchPenalty);
                 }
-            }
-            else {
-                // selection in progress, reset lastActionScore
-                self.lastActionScore = 0;
             }
         }
     }

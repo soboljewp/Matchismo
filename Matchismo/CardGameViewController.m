@@ -14,7 +14,6 @@
 
 @property (weak, nonatomic) IBOutlet UILabel *scoreLabel;
 @property (weak, nonatomic) IBOutlet UILabel *lastActionLabel;
-@property (nonatomic) NSUInteger matchCount;
 @end
 
 static const int MISMATCH_PENALTY = 2;
@@ -26,14 +25,6 @@ static const int MISMATCH_PENALTY = 2;
     if (!_game) _game = [self createGame];
     return _game;
 }
-
-- (NSUInteger)matchCount
-{
-    if (_matchCount == 0) _matchCount = 2;
-    return _matchCount;
-}
-
-
 
 - (Deck *)createDeck // abstract
 {
@@ -55,7 +46,6 @@ static const int MISMATCH_PENALTY = 2;
 }
 - (IBAction)touchDealButton:(id)sender {
     self.game = [self createGame];
-    self.game.cardsToMatchCount = self.matchCount;
     [self updateUI];
 }
 
@@ -66,18 +56,16 @@ static const int MISMATCH_PENALTY = 2;
     
     NSLog(@"Chosen card count: %d", [self.game.chosenCards count]);
     NSMutableString *chosenCardsString = [[NSMutableString alloc] init];
-    /*for (Card *card in self.game.chosenCards) {
+    for (Card *card in self.game.chosenCards) {
         [chosenCardsString appendString:card.contents];
-    }*/
+    }
     self.lastActionLabel.text = chosenCardsString;
     
-    if ([self.game.chosenCards count] == self.matchCount) {
-        if (self.game.lastActionScore < 0) {
-            self.lastActionLabel.text = [NSString stringWithFormat:@"%@ dont match! %d points penalty!", chosenCardsString, MISMATCH_PENALTY];
-        }
-        else {
-            self.lastActionLabel.text = [NSString stringWithFormat:@"Matched %@ for %d points!", chosenCardsString, self.game.lastActionScore];
-        }
+    if (self.game.lastActionScore < 0) {
+        self.lastActionLabel.text = [NSString stringWithFormat:@"%@ dont match! %d points penalty!", chosenCardsString, MISMATCH_PENALTY];
+    }
+    else if (self.game.lastActionScore > 0) {
+        self.lastActionLabel.text = [NSString stringWithFormat:@"Matched %@ for %d points!", chosenCardsString, self.game.lastActionScore];
     }
 }
 

@@ -10,6 +10,12 @@
 
 @implementation Card
 
+- (NSUInteger)matchCount
+{
+    if (_matchCount == 0) _matchCount = 2;
+    return _matchCount;
+}
+
 - (int)match:(NSArray *)otherCards
 {
     int score = 0;
