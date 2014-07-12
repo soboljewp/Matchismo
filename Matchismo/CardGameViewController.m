@@ -7,11 +7,13 @@
 //
 
 #import "CardGameViewController.h"
+#import "GameHistoryViewController.h"
 
 
 @interface CardGameViewController ()
 
 @property (weak, nonatomic) IBOutlet UILabel *scoreLabel;
+@property (nonatomic, strong) NSMutableAttributedString *actionHistoryString;
 
 @end
 
@@ -37,6 +39,12 @@ static const int MISMATCH_PENALTY = 2;
                                        mismatchPenalty:MISMATCH_PENALTY];
 }
 
+- (NSMutableAttributedString *)actionHistoryString
+{
+    if (!_actionHistoryString) _actionHistoryString = [[NSMutableAttributedString alloc] init];
+    return _actionHistoryString;
+}
+
 - (IBAction)touchCardButton:(UIButton *)sender
 {
     NSUInteger chosenButtonIndex = [self.cardButtons indexOfObject:sender];
@@ -46,6 +54,7 @@ static const int MISMATCH_PENALTY = 2;
 
 - (IBAction)touchDealButton:(id)sender {
     self.game = [self createGame];
+    self.actionHistoryString = [[NSMutableAttributedString alloc] init];
     [self updateUI];
 }
 
@@ -53,7 +62,7 @@ static const int MISMATCH_PENALTY = 2;
 {
     self.scoreLabel.text = [NSString stringWithFormat:@"Score: %d", self.game.score];
     
-    NSMutableAttributedString *chosenCardsStr = [self chosenCardString];
+    NSMutableAttributedString *lastActionString = [self chosenCardString];
     NSString *pointsText = nil;
   
     if (self.game.lastActionScore < 0) {
@@ -64,10 +73,14 @@ static const int MISMATCH_PENALTY = 2;
     }
     
     if (pointsText) {
-        [chosenCardsStr appendAttributedString:[[NSAttributedString alloc] initWithString:pointsText]];
+        [lastActionString appendAttributedString:[[NSAttributedString alloc] initWithString:pointsText]];
     }
     
-    self.lastActionLabel.attributedText = chosenCardsStr;
+    self.lastActionLabel.attributedText = lastActionString;
+    
+    [self.actionHistoryString appendAttributedString:lastActionString];
+    NSAttributedString *newline = [[NSAttributedString alloc] initWithString:@"\n"];
+    [self.actionHistoryString appendAttributedString:newline];
 }
 
 - (NSMutableAttributedString *)chosenCardString
@@ -80,6 +93,16 @@ static const int MISMATCH_PENALTY = 2;
     }
     
     return [[NSMutableAttributedString alloc] initWithString:cardsString];
+}
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    if ([segue.identifier isEqualToString:@"showHistory"]) {
+        if ([segue.destinationViewController isKindOfClass:[GameHistoryViewController class]]) {
+            GameHistoryViewController *historyVC = (GameHistoryViewController *)segue.destinationViewController;
+            historyVC.historyString = self.actionHistoryString;
+        }
+    }
 }
 
 @end

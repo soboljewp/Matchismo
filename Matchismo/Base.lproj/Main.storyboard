@@ -418,6 +418,11 @@
                                 <action selector="touchDealButton:" destination="vXZ-lx-hvc" id="t8f-Xz-Kqh"/>
                             </connections>
                         </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" title="History" id="4HS-nD-x90">
+                            <connections>
+                                <segue destination="LZ5-Ea-h5x" kind="push" identifier="showHistory" id="qFx-bk-ZET"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <connections>
                         <outlet property="lastActionLabel" destination="aZw-Kk-hao" id="bUz-Zh-l1G"/>
@@ -771,6 +776,11 @@
                                 <action selector="touchDealButton:" destination="c1l-P0-TA6" id="XYh-un-TaX"/>
                             </connections>
                         </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" title="History" id="oPV-89-5nS">
+                            <connections>
+                                <segue destination="LZ5-Ea-h5x" kind="push" identifier="showHistory" id="4II-j5-uzA"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <connections>
                         <outlet property="lastActionLabel" destination="S9U-y7-yqw" id="jtS-0h-BiI"/>
@@ -801,6 +811,37 @@
             </objects>
             <point key="canvasLocation" x="712" y="474"/>
         </scene>
+        <!--Game History View Controller - History-->
+        <scene sceneID="61Q-kl-B7w">
+            <objects>
+                <viewController id="LZ5-Ea-h5x" customClass="GameHistoryViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="7cx-kv-u5I"/>
+                        <viewControllerLayoutGuide type="bottom" id="5Ti-8e-ZTY"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="2Bn-Yt-yCZ">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="LXL-Xl-Qed">
+                                <rect key="frame" x="0.0" y="76" width="320" height="346"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="History" id="GRu-Fn-7hJ"/>
+                    <connections>
+                        <outlet property="historyTextView" destination="LXL-Xl-Qed" id="5cl-MV-ru6"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="kLz-0d-J41" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1273" y="180"/>
+        </scene>
     </scenes>
     <resources>
         <image name="PlayingCardGame" width="30" height="30"/>
@@ -813,4 +854,7 @@
         <simulatedOrientationMetrics key="orientation"/>
         <simulatedScreenMetrics key="destination"/>
     </simulatedMetricsContainer>
+    <inferredMetricsTieBreakers>
+        <segue reference="4II-j5-uzA"/>
+    </inferredMetricsTieBreakers>
 </document>
