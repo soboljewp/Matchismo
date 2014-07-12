@@ -11,9 +11,8 @@
 
 @interface CardGameViewController ()
 
-
 @property (weak, nonatomic) IBOutlet UILabel *scoreLabel;
-@property (weak, nonatomic) IBOutlet UILabel *lastActionLabel;
+
 @end
 
 static const int MISMATCH_PENALTY = 2;
@@ -44,6 +43,7 @@ static const int MISMATCH_PENALTY = 2;
     [self.game chooseCardAtIndex:chosenButtonIndex];
     [self updateUI];
 }
+
 - (IBAction)touchDealButton:(id)sender {
     self.game = [self createGame];
     [self updateUI];
@@ -51,24 +51,35 @@ static const int MISMATCH_PENALTY = 2;
 
 - (void)updateUI
 {
-
     self.scoreLabel.text = [NSString stringWithFormat:@"Score: %d", self.game.score];
     
-    NSLog(@"Chosen card count: %d", [self.game.chosenCards count]);
-    NSMutableString *chosenCardsString = [[NSMutableString alloc] init];
-    for (Card *card in self.game.chosenCards) {
-        if (card.contents) {
-            [chosenCardsString appendString:card.contents];
-        }
-    }
-    self.lastActionLabel.text = chosenCardsString;
-    
+    NSMutableAttributedString *chosenCardsStr = [self chosenCardString];
+    NSString *pointsText = nil;
+  
     if (self.game.lastActionScore < 0) {
-        self.lastActionLabel.text = [NSString stringWithFormat:@"%@ dont match! %d points penalty!", chosenCardsString, MISMATCH_PENALTY];
+        pointsText = [NSString stringWithFormat:@" dont match! %d points penalty!", MISMATCH_PENALTY];
     }
     else if (self.game.lastActionScore > 0) {
-        self.lastActionLabel.text = [NSString stringWithFormat:@"Matched %@ for %d points!", chosenCardsString, self.game.lastActionScore];
+        pointsText = [NSString stringWithFormat:@" match! You get %d points!", self.game.lastActionScore];
     }
+    
+    if (pointsText) {
+        [chosenCardsStr appendAttributedString:[[NSAttributedString alloc] initWithString:pointsText]];
+    }
+    
+    self.lastActionLabel.attributedText = chosenCardsStr;
+}
+
+- (NSMutableAttributedString *)chosenCardString
+{
+    NSMutableString *cardsString = [[NSMutableString alloc] init];
+    for (Card *card in self.game.chosenCards) {
+        if (card.contents) {
+            [cardsString appendString:card.contents];
+        }
+    }
+    
+    return [[NSMutableAttributedString alloc] initWithString:cardsString];
 }
 
 @end

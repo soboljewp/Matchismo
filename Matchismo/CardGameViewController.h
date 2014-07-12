@@ -16,7 +16,9 @@
 // for subclasses
 @property (strong, nonatomic) CardMatchingGame *game;
 @property (strong, nonatomic) IBOutletCollection(UIButton) NSArray *cardButtons;
+@property (weak, nonatomic) IBOutlet UILabel *lastActionLabel;
 
 - (Deck *)createDeck; // abstract
 - (void)updateUI;
+- (NSMutableAttributedString *)chosenCardString;
 @end

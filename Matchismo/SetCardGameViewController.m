@@ -28,8 +28,6 @@
 
 - (void)updateUI
 {
-    [super updateUI];
-    
     for (UIButton *cardButton in self.cardButtons) {
         NSUInteger cardButtonIndex = [self.cardButtons indexOfObject:cardButton];
         Card *card = [self.game cardAtIndex:cardButtonIndex];
@@ -39,6 +37,18 @@
                               forState:UIControlStateNormal];
         cardButton.enabled = !card.isMatched;
     }
+    
+    [super updateUI];
+}
+
+- (NSMutableAttributedString *)chosenCardString
+{
+    NSMutableAttributedString *chosenCardStr = [[NSMutableAttributedString alloc] init];
+    for (Card *card in self.game.chosenCards) {
+        [chosenCardStr appendAttributedString:[self titleForCard:card]];
+    }
+    
+    return chosenCardStr;
 }
 
 - (NSAttributedString *)titleForCard:(Card *)card
